@@ -6,4 +6,5 @@ class ConstColor {
 
   static Color accentColor = Colors.orange;
   static Color bgDark = Colors.black;
+  static Color white = Colors.white;
 }
