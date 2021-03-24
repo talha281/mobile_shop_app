@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shop_app/resources/constants/colors.dart';
 import 'package:mobile_shop_app/resources/utils/text_fields/text_field_util.dart';
+import 'package:mobile_shop_app/resources/widgets/rounded_button.dart';
+import 'package:mobile_shop_app/ui/registration_page.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -56,21 +58,8 @@ class LoginPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: Container(
-                          height: 50,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: ConstColor.primaryColor,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color: ConstColor.white,
-                              ),
-                            ),
-                          ),
+                        child: RoundedButton(
+                          text: "Login",
                         ),
                       ),
                       SizedBox(
@@ -91,12 +80,21 @@ class LoginPage extends StatelessWidget {
                             //these two method logic will be done with bloc
                             onHover: (_) {},
                             onExit: (_) {},
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            RegistrationPage()));
+                              },
+                              child: Text(
+                                "Sign In",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ),
