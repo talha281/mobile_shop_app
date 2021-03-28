@@ -228,10 +228,16 @@ class _DashboardState extends State<Dashboard> {
                     } else {
                       return SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 28.0),
+                          padding: const EdgeInsets.only(top: 228.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Center(child: Text('Welcome, sir')),
+                              Center(
+                                  child: Text(
+                                'Welcome,sir\n Let us carry your half burden',
+                                style: TextStyle(fontSize: 22),
+                              )),
                             ],
                           ),
                         ),
