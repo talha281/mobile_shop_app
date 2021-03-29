@@ -4,6 +4,7 @@ import 'package:mobile_shop_app/blocs/auth/bloc/auth_bloc.dart';
 import 'package:mobile_shop_app/blocs/login/bloc/login_bloc.dart';
 import 'package:mobile_shop_app/ui/dashboard.dart';
 import 'package:mobile_shop_app/ui/login_page.dart';
+import 'package:mobile_shop_app/ui/splash.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -12,9 +13,14 @@ class Home extends StatelessWidget {
       builder: (context, state) {
         if (state is AuthenticatedState) {
           return Dashboard();
-        } else {
+        } else if (state is UnAuthenticatedState) {
           BlocProvider.of<LoginBloc>(context).add(LoggingIn());
           return LoginPage();
+        } else if (state is AlreadyLoggedInState) {
+          return Dashboard();
+        } else {
+          print('hey buddy the state which is unlike an piles is nothirng but $state state');
+          return Dashboard();
         }
       },
     );

@@ -43,6 +43,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield Loading();
       userRepository.storeUser(event.user!);
       yield LoggingState(isVerified: '');
-    }
+    } 
   }
 }

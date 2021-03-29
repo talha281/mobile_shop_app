@@ -29,3 +29,4 @@ class LogOut extends AuthEvent {
   @override
   List<Object> get props => [context];
 }
+

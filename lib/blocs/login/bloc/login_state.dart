@@ -20,3 +20,4 @@ class LoggingState extends LoginState {
 class RegisteringState extends LoginState {}
 
 class Loading extends LoginState {}
+

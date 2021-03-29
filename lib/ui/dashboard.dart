@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_shop_app/blocs/auth/bloc/auth_bloc.dart';
 import 'package:mobile_shop_app/blocs/dashboard/bloc/dashboard_bloc.dart';
-import 'package:mobile_shop_app/data/models/product_model.dart';
-import 'package:mobile_shop_app/data/models/product_record_model.dart';
+import 'package:mobile_shop_app/blocs/login/bloc/login_bloc.dart';
 import 'package:mobile_shop_app/resources/constants/colors.dart';
 import 'package:mobile_shop_app/ui/customer_record_widget.dart';
 import 'package:mobile_shop_app/ui/delete_phone_record.dart';
@@ -25,6 +25,17 @@ class _DashboardState extends State<Dashboard> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          //borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+            end: Alignment.topCenter,
+            begin: Alignment.bottomCenter,
+            colors: [
+              Colors.blue.shade500,
+              ConstColor.primaryColor,
+            ],
+          ),
+        ),
         child: Row(
           children: [
             Container(
@@ -32,9 +43,25 @@ class _DashboardState extends State<Dashboard> {
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 68.0),
+                  padding: const EdgeInsets.only(top: 18.0),
                   child: Column(
                     children: [
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<AuthBloc>(context)
+                              .add(LogOut(context));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(right: 45),
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child: Icon(
+                                FontAwesomeIcons.powerOff,
+                                color: Colors.white,
+                              )),
+                        ),
+                      ),
+                      SizedBox(height: 30),
                       BlocBuilder<DashboardBloc, DashboardState>(
                         builder: (context, state) {
                           return Container(
@@ -190,6 +217,21 @@ class _DashboardState extends State<Dashboard> {
                           );
                         },
                       ),
+                      // Container(
+                      //   padding: EdgeInsets.only(top: 15),
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(10)),
+                      //   child: MaterialButton(
+                      //     color: Colors.white,
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: new BorderRadius.circular(10.0)),
+                      //     onPressed: () {
+                      //       BlocProvider.of<AuthBloc>(context)
+                      //           .add(LogOut(context));
+                      //     },
+                      //     child: Text('Log Out'),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -221,26 +263,437 @@ class _DashboardState extends State<Dashboard> {
                       return CustomerRecordWidget();
                     } else if (state is DeletePhoneState) {
                       return DeleteStocksWidget();
-                    } else if (state is Loading) {
-                      return Container(
-                        child: Center(child: CircularProgressIndicator()),
-                      );
                     } else {
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 228.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Center(
-                                  child: Text(
-                                'Welcome,sir\n Let us carry your half burden',
-                                style: TextStyle(fontSize: 22),
-                              )),
-                            ],
+                      return Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(25),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height /
+                                        1.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: LinearGradient(
+                                        end: Alignment.topCenter,
+                                        begin: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.blue.shade400,
+                                          ConstColor.primaryColor,
+                                        ],
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(15),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              1.2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.bottomRight,
+                                                    child: Icon(
+                                                      FontAwesomeIcons
+                                                          .mobileAlt,
+                                                      color: ConstColor
+                                                          .primaryColor,
+                                                      size: 85,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 85, bottom: 12),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 85, bottom: 12),
+                                                    child: Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 60),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    // padding: EdgeInsets.only(
+                                                    //     bottom: 60),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.bottomLeft,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.bottomRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        top: 80, right: 160),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        top: 70, right: 70),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 85,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'Welcome,',
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontSize: 41,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 4),
+                                                          child: Text(
+                                                            "Here's Your True Companion",
+                                                            style: TextStyle(
+                                                                fontSize: 40,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w900),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          child: Container(
+                                            padding: EdgeInsets.all(45),
+                                            child: Center(
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 170, bottom: 50),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 215,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        right: 170, bottom: 50),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 215,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 215,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                bottom: 5),
+                                                        child: Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Center(
+                                                            child: Text(
+                                                                'Share your burden with us.',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    color: Colors
+                                                                        .white)),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Center(
+                                                          child: Text(
+                                                              'MOBILE SHOP SYSTEM',
+                                                              style: TextStyle(
+                                                                  fontSize: 50,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: Colors
+                                                                      .white)),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 5),
+                                                        child: Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Center(
+                                                            child: Text(
+                                                                'A partner to ease your work.',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    color: Colors
+                                                                        .white)),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 9.5, top: 11),
+                                                      child: Icon(
+                                                          FontAwesomeIcons
+                                                              .mobileAlt,
+                                                          color: ConstColor
+                                                              .primaryColor,
+                                                          size: 25)),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 108),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 25,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: Icon(
+                                                      FontAwesomeIcons
+                                                          .mobileAlt,
+                                                      color: ConstColor
+                                                          .primaryColor,
+                                                      size: 25,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                      bottom: 5,
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 95,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                      bottom: 73,
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.bottomRight,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mobileAlt,
+                                                        color: ConstColor
+                                                            .primaryColor,
+                                                        size: 25,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Icon(
+                                                      FontAwesomeIcons
+                                                          .mobileAlt,
+                                                      color: ConstColor
+                                                          .primaryColor,
+                                                      size: 95,
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.bottomLeft,
+                                                    child: Icon(
+                                                      FontAwesomeIcons
+                                                          .mobileAlt,
+                                                      color: ConstColor
+                                                          .primaryColor,
+                                                      size: 95,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              //      Text(
+                                              //   'Text bas aise hi',
+                                              //   style: TextStyle(
+                                              //       fontSize: 43,
+                                              //       color: Colors.white,
+                                              //       fontWeight: FontWeight.w700),
+                                              // )
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       );
                     }
                   },

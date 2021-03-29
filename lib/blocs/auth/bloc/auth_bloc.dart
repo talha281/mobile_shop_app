@@ -18,7 +18,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthEvent event,
   ) async* {
     if (event is AppStarted) {
-      final bool token = await userRepository.getUser() != null;
+      final UserModel? storedUser = await userRepository.getUser();
+      final bool token = storedUser!.email != null;
+      print('this is the $token ');
       if (token) {
         UserModel? user = await userRepository.getUser();
         yield AuthenticatedState(user: user);

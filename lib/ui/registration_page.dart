@@ -6,12 +6,74 @@ import 'package:mobile_shop_app/resources/constants/colors.dart';
 import 'package:mobile_shop_app/resources/utils/text_fields/text_field_util.dart';
 import 'package:mobile_shop_app/resources/widgets/rounded_button.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
+  @override
+  _RegistrationPageState createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  bool canPress = false;
+  String match = '';
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  validator() {
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    RegExp regExp = new RegExp(p);
+    bool val = regExp.hasMatch(emailController.text);
+    var canhit = nameController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty &&
+        val;
+
+    if (canhit) {
+      setState(() {
+        canPress = true;
+      });
+    } else {
+      setState(() {
+        canPress = false;
+      });
+    }
+  }
+
+  passwordValidator() {
+    if (passwordController.text != confirmPasswordController.text) {
+      setState(() {
+        match = "Password doesn't match";
+      });
+      confirmPasswordController.clear();
+    }
+  }
+
+  @override
+  void initState() {
+    nameController.addListener(() {
+      validator();
+    });
+    emailController.addListener(() {
+      validator();
+      //showSnackForEmail();
+    });
+    passwordController.addListener(() {
+      validator();
+    });
+    confirmPasswordController.addListener(() {
+      validator();
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
@@ -28,7 +90,7 @@ class RegistrationPage extends StatelessWidget {
                 Text(
                   "Register",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: ConstColor.primaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w400),
                 ),
@@ -58,8 +120,10 @@ class RegistrationPage extends StatelessWidget {
                 EditTextUtils().getCustomEditTextArea(
                   context: context,
                   controller: passwordController,
+                  obscureText: true,
                   hintValue: "Enter Password",
                   icon: Icons.lock_outline,
+                  maxLength: 8,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(
@@ -68,8 +132,10 @@ class RegistrationPage extends StatelessWidget {
                 EditTextUtils().getCustomEditTextArea(
                   context: context,
                   controller: confirmPasswordController,
+                  obscureText: true,
                   hintValue: "Confirm password",
                   icon: Icons.lock_outline,
+                  maxLength: 8,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(
@@ -89,14 +155,16 @@ class RegistrationPage extends StatelessWidget {
                     hoverElevation: 20,
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(20.0)),
-                    onPressed: () {
-                      UserModel user = UserModel(
-                          userName: nameController.text,
-                          email: emailController.text,
-                          password: passwordController.text);
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(StoredInPref(user: user));
-                    },
+                    onPressed: (canPress)
+                        ? () {
+                            UserModel user = UserModel(
+                                userName: nameController.text,
+                                email: emailController.text,
+                                password: passwordController.text);
+                            BlocProvider.of<LoginBloc>(context)
+                                .add(StoredInPref(user: user));
+                          }
+                        : null,
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(

@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:mobile_shop_app/resources/constants/colors.dart';
 
 class EditTextUtils {
-  TextFormField getCustomEditTextArea({
-    BuildContext? context,
-    String labelValue = "",
-    String hintValue = "",
-    Function? validator,
-    IconData? icon,
-    bool? validation,
-    TextEditingController? controller,
-    TextInputType keyboardType = TextInputType.text,
-    String? validationErrorMsg,
-  }) {
+  TextFormField getCustomEditTextArea(
+      {BuildContext? context,
+      String labelValue = "",
+      String hintValue = "",
+      Function? validator,
+      IconData? icon,
+      bool? validation,
+      TextEditingController? controller,
+      TextInputType keyboardType = TextInputType.text,
+      String? validationErrorMsg,
+      bool obscureText = false,
+      int? maxLength}) {
     return TextFormField(
       controller: controller,
       cursorColor: ConstColor.primaryColor,
       cursorHeight: 25,
       keyboardType: keyboardType,
+      obscureText: obscureText,
+      maxLength: maxLength,
       decoration: InputDecoration(
         prefixIcon: Icon(
           icon,
@@ -29,6 +32,7 @@ class EditTextUtils {
         labelStyle: TextStyle(color: ConstColor.primaryColor),
         focusColor: ConstColor.primaryColor,
         filled: true,
+
         isDense: true,
         border: buildOutlineInputBorder(ConstColor.primaryColor),
         disabledBorder: new OutlineInputBorder(

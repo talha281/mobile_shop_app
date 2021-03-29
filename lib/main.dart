@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             create: (context) => sl<DashboardBloc>(),
           ),
           BlocProvider<AuthBloc>(
-            create: (context) => sl<AuthBloc>(),
+            create: (context) => sl<AuthBloc>()..add(AppStarted()),
           ),
            BlocProvider<LoginBloc>(
       create: (context) => sl<LoginBloc>(),)
