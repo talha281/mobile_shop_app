@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
           end: Alignment.topCenter,
           begin: Alignment.bottomCenter,
           colors: [
-            Colors.blue.shade400,
+            ConstColor.accentColor,
             ConstColor.primaryColor,
           ],
         ),
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                               size: 70,
                             ),
                           ),
-                          SizedBox(height:20),
+                          SizedBox(height: 20),
                           (state.isVerified!.isEmpty)
                               ? Center(
                                   child: Text(
@@ -138,7 +138,6 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 10,
                           ),
-                          
                           SizedBox(
                             height: 20,
                           ),
@@ -147,7 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                             width: 120,
                             child: MaterialButton(
                               disabledTextColor: Colors.grey,
-                              disabledColor: Colors.blue.shade400,
+                              disabledColor: ConstColor.primaryColor
+                                  .withOpacity(0.5)
+                                  ,
                               color: ConstColor.primaryColor,
                               elevation: 4,
                               hoverElevation: 20,

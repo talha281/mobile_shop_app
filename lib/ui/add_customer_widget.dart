@@ -402,7 +402,9 @@ class _AddCustomerWidgetState extends State<AddCustomerWidget> {
                                   TextFormField(
                                     controller: emailController,
                                   ),
-                                  SizedBox(height: 7,),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
                                   Text('Enter email properly*',
                                       style: TextStyle(
                                           color: Colors.red, fontSize: 11)),
@@ -418,7 +420,8 @@ class _AddCustomerWidgetState extends State<AddCustomerWidget> {
                                         width: 150,
                                         child: MaterialButton(
                                           disabledTextColor: Colors.grey,
-                                          disabledColor: Colors.blue.shade400,
+                                          disabledColor: ConstColor.primaryColor
+                                              .withOpacity(0.5),
                                           color: ConstColor.primaryColor,
                                           elevation: 4,
                                           hoverElevation: 20,
@@ -503,7 +506,8 @@ class _AddCustomerWidgetState extends State<AddCustomerWidget> {
                                         width: 100,
                                         child: MaterialButton(
                                           disabledTextColor: Colors.grey,
-                                          disabledColor: Colors.blue.shade400,
+                                          disabledColor: ConstColor.primaryColor
+                                              .withOpacity(0.5),
                                           color: ConstColor.primaryColor,
                                           elevation: 4,
                                           hoverElevation: 20,

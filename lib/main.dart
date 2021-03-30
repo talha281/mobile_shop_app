@@ -24,13 +24,14 @@ class MyApp extends StatelessWidget {
           BlocProvider<AuthBloc>(
             create: (context) => sl<AuthBloc>()..add(AppStarted()),
           ),
-           BlocProvider<LoginBloc>(
-      create: (context) => sl<LoginBloc>(),)
+          BlocProvider<LoginBloc>(
+            create: (context) => sl<LoginBloc>(),
+          )
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.orange,
           ),
           home: Home(),
         ));

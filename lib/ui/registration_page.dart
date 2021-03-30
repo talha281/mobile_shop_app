@@ -149,7 +149,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   width: 120,
                   child: MaterialButton(
                     disabledTextColor: Colors.grey,
-                    disabledColor: Colors.blue.shade400,
+                    disabledColor: ConstColor.primaryColor.withOpacity(0.5),
                     color: ConstColor.primaryColor,
                     elevation: 4,
                     hoverElevation: 20,

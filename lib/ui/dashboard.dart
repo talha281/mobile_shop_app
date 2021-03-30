@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
             end: Alignment.topCenter,
             begin: Alignment.bottomCenter,
             colors: [
-              Colors.blue.shade500,
+              ConstColor.accentColor,
               ConstColor.primaryColor,
             ],
           ),
@@ -71,13 +71,15 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.mobileAlt,
                                 color: (state is AddPhoneState)
-                                    ? Colors.blue.shade600
+                                    ? ConstColor.primaryColor
+                                        .withOpacity(0.5)
+                                        
                                     : Colors.white,
                               ),
                               title: Text('Add New Phone',
                                   style: (state is AddPhoneState)
                                       ? TextStyle(
-                                          color: Colors.blue.shade800,
+                                          color: ConstColor.primaryColor,
                                           fontSize: 16)
                                       : TextStyle(
                                           color: Colors.white, fontSize: 13)),
@@ -108,7 +110,7 @@ class _DashboardState extends State<Dashboard> {
                               title: Text('Customers',
                                   style: (state is AddCustomerState)
                                       ? TextStyle(
-                                          color: Colors.blue.shade800,
+                                          color: ConstColor.primaryColor,
                                           fontSize: 16)
                                       : TextStyle(
                                           color: Colors.white, fontSize: 13)),
@@ -133,13 +135,13 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.inbox,
                                 color: (state is StocksState)
-                                    ? Colors.blue.shade800
+                                    ? ConstColor.primaryColor
                                     : Colors.white,
                               ),
                               title: Text('Stocks',
                                   style: (state is StocksState)
                                       ? TextStyle(
-                                          color: Colors.blue.shade800,
+                                          color: ConstColor.primaryColor,
                                           fontSize: 16)
                                       : TextStyle(
                                           color: Colors.white, fontSize: 13)),
@@ -164,13 +166,15 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.searchengin,
                                 color: (state is CustomerRecordState)
-                                    ? Colors.blue.shade600
+                                    ? ConstColor.primaryColor
+                                        .withOpacity(0.5)
+                                        
                                     : Colors.white,
                               ),
                               title: Text('Customer Records',
                                   style: (state is CustomerRecordState)
                                       ? TextStyle(
-                                          color: Colors.blue.shade800,
+                                          color: ConstColor.primaryColor,
                                           fontSize: 16)
                                       : TextStyle(
                                           color: Colors.white, fontSize: 13)),
@@ -201,7 +205,7 @@ class _DashboardState extends State<Dashboard> {
                               title: Text('Delete Phone Record',
                                   style: (state is DeletePhoneState)
                                       ? TextStyle(
-                                          color: Colors.blue.shade800,
+                                          color: ConstColor.primaryColor,
                                           fontSize: 16)
                                       : TextStyle(
                                           color: Colors.white, fontSize: 13)),
@@ -282,7 +286,7 @@ class _DashboardState extends State<Dashboard> {
                                         end: Alignment.topCenter,
                                         begin: Alignment.bottomCenter,
                                         colors: [
-                                          Colors.blue.shade400,
+                                          ConstColor.accentColor,
                                           ConstColor.primaryColor,
                                         ],
                                       ),

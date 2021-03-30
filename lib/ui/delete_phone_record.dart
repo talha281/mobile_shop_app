@@ -165,7 +165,10 @@ class DeleteStocksWidget extends StatelessWidget {
                         ),
                         Text('Click on the element to delete*',
                             style: TextStyle(
-                                color: Colors.blue.shade500, fontSize: 11)),
+                                color: ConstColor.primaryColor
+                                    .withOpacity(0.5)
+                                    ,
+                                fontSize: 11)),
                         SizedBox(height: 20),
                         SingleChildScrollView(
                           child: FittedBox(
@@ -196,7 +199,8 @@ class DeleteStocksWidget extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: ListTile(
-                                              tileColor: Colors.blue.shade200,
+                                              tileColor: ConstColor.primaryColor
+                                                  .withOpacity(0.5),
                                               leading: Text('Srno.',
                                                   style: TextStyle(
                                                     fontSize: 16,
@@ -372,7 +376,7 @@ class DeleteStocksWidget extends StatelessWidget {
                                 //     headingRowColor:
                                 //         MaterialStateColor.resolveWith(
                                 //       (states) {
-                                //         return Colors.blue.shade200;
+                                //         return ConstColor.primaryColor.withOpacity(0.5);
                                 //       },
                                 //     ),
                                 //     columns: <DataColumn>[
@@ -423,7 +427,7 @@ class DeleteStocksWidget extends StatelessWidget {
                                 //       ),
                                 //       DataColumn(
                                 //         label: Container(
-                                //           color: Colors.blue.shade200,
+                                //           color: ConstColor.primaryColor.withOpacity(0.5),
                                 //           width: MediaQuery.of(context)
                                 //                   .size
                                 //                   .width /

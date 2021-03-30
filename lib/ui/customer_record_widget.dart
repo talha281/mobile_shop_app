@@ -37,7 +37,8 @@ class CustomerRecordWidget extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.only(right: 20.0),
                           child: Icon(
-                            FontAwesomeIcons.userFriends,color: ConstColor.primaryColor,
+                            FontAwesomeIcons.userFriends,
+                            color: ConstColor.primaryColor,
                             size: 28,
                           )),
                       Text(
@@ -176,15 +177,16 @@ class CustomerRecordWidget extends StatelessWidget {
                                       child: Center(
                                           child: Text(
                                         'No records available!',
-                                        style: TextStyle(fontSize: 24,),
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                        ),
                                       )))
                                   : DataTable(
                                       showBottomBorder: true,
                                       headingRowColor:
                                           MaterialStateColor.resolveWith(
-                                        (states) {
-                                          return Colors.blue.shade200;
-                                        },
+                                        (states) => ConstColor.primaryColor
+                                            .withOpacity(0.5),
                                       ),
                                       columns: <DataColumn>[
                                         DataColumn(
@@ -262,7 +264,8 @@ class CustomerRecordWidget extends StatelessWidget {
                                         ),
                                         DataColumn(
                                           label: Container(
-                                            color: Colors.blue.shade200,
+                                            color: ConstColor.primaryColor
+                                                .withOpacity(0.5),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -291,7 +294,8 @@ class CustomerRecordWidget extends StatelessWidget {
                                         ),
                                         DataColumn(
                                           label: Container(
-                                            color: Colors.blue.shade200,
+                                            color: ConstColor.primaryColor
+                                                .withOpacity(0.5),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /

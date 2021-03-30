@@ -37,7 +37,8 @@ class StocksWidget extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.only(right: 10.0),
                           child: Icon(
-                            Icons.book_rounded,color: ConstColor.primaryColor,
+                            Icons.book_rounded,
+                            color: ConstColor.primaryColor,
                             size: 28,
                           )),
                       Text(
@@ -183,7 +184,8 @@ class StocksWidget extends StatelessWidget {
                                       headingRowColor:
                                           MaterialStateColor.resolveWith(
                                         (states) {
-                                          return Colors.blue.shade200;
+                                          return ConstColor.primaryColor
+                                              .withOpacity(0.5);
                                         },
                                       ),
                                       columns: <DataColumn>[
@@ -234,7 +236,6 @@ class StocksWidget extends StatelessWidget {
                                         ),
                                         DataColumn(
                                           label: Container(
-                                            color: Colors.blue.shade200,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /

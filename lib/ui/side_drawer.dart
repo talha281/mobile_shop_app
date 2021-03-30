@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shop_app/resources/constants/colors.dart';
 
 class SideDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class SideDrawer extends StatelessWidget {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: ConstColor.primaryColor.withOpacity(0.5),
               ),
             ),
             ListTile(
