@@ -71,9 +71,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.mobileAlt,
                                 color: (state is AddPhoneState)
-                                    ? ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        
+                                    ? ConstColor.primaryColor.withOpacity(0.5)
                                     : Colors.white,
                               ),
                               title: Text('Add New Phone',
@@ -104,7 +102,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.userFriends,
                                 color: (state is AddCustomerState)
-                                    ? Colors.lightBlue
+                                    ? ConstColor.primaryColor
                                     : Colors.white,
                               ),
                               title: Text('Customers',
@@ -166,9 +164,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.searchengin,
                                 color: (state is CustomerRecordState)
-                                    ? ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        
+                                    ? ConstColor.primaryColor.withOpacity(0.5)
                                     : Colors.white,
                               ),
                               title: Text('Customer Records',

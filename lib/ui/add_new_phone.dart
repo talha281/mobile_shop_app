@@ -105,7 +105,6 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
     });
     quantityController.addListener(() {
       validator();
-      showQuantitySnack();
     });
     rearCamController.addListener(() {
       validator();
@@ -115,7 +114,6 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
     });
     priceController.addListener(() {
       validator();
-      showPriceSnack();
     });
     super.initState();
   }
@@ -184,6 +182,7 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                             Text('RAM', style: TextStyle(fontSize: 15)),
                             TextFormField(
                                 controller: ramSizeController,
+                                keyboardType: TextInputType.number,
                                 decoration:
                                     InputDecoration(suffixText: 'GB RAM')),
                             SizedBox(height: 35),
@@ -229,7 +228,6 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                             Text('Quantity', style: TextStyle(fontSize: 15)),
                             TextFormField(
                               controller: quantityController,
-                              
                             ),
                             SizedBox(height: 35),
                             Text('Price', style: TextStyle(fontSize: 15)),
@@ -246,8 +244,7 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                                   child: MaterialButton(
                                     disabledTextColor: Colors.grey,
                                     disabledColor: ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        ,
+                                        .withOpacity(0.5),
                                     color: ConstColor.primaryColor,
                                     elevation: 4,
                                     hoverElevation: 20,
@@ -256,12 +253,8 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                                             new BorderRadius.circular(20.0)),
                                     onPressed: (canPress)
                                         ? () async {
-                                            int id = await BlocProvider.of<
-                                                    DashboardBloc>(context)
-                                                .productRecordRepository
-                                                .generatedProductId();
                                             ProductModel product = ProductModel(
-                                                id: id,
+                                                // id: id,
                                                 companyName:
                                                     companyNameController.text
                                                         .toLowerCase(),
@@ -296,8 +289,7 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                                                 style: TextStyle(
                                                     color: ConstColor
                                                         .primaryColor
-                                                        .withOpacity(0.5)
-                                                        ),
+                                                        .withOpacity(0.5)),
                                               ),
                                             ));
                                             companyNameController.clear();
@@ -332,8 +324,7 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                                   child: MaterialButton(
                                     disabledTextColor: Colors.grey,
                                     disabledColor: ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        ,
+                                        .withOpacity(0.5),
                                     color: ConstColor.primaryColor,
                                     elevation: 4,
                                     hoverElevation: 20,

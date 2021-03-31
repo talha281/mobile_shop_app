@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+       
         gradient: LinearGradient(
           end: Alignment.topCenter,
           begin: Alignment.bottomCenter,
@@ -132,7 +132,6 @@ class _LoginPageState extends State<LoginPage> {
                             validationErrorMsg: 'Entered password is wrong',
                             hintValue: "Enter your Passowrd",
                             icon: Icons.lock_outline,
-                            maxLength: 8,
                             keyboardType: TextInputType.emailAddress,
                           ),
                           SizedBox(
@@ -146,9 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                             width: 120,
                             child: MaterialButton(
                               disabledTextColor: Colors.grey,
-                              disabledColor: ConstColor.primaryColor
-                                  .withOpacity(0.5)
-                                  ,
+                              disabledColor:
+                                  ConstColor.primaryColor.withOpacity(0.5),
                               color: ConstColor.primaryColor,
                               elevation: 4,
                               hoverElevation: 20,
@@ -182,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Don't have an account yet? ",
+                                "Don't have an account? ",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,

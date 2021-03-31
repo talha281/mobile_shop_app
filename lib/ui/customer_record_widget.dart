@@ -264,8 +264,7 @@ class CustomerRecordWidget extends StatelessWidget {
                                         ),
                                         DataColumn(
                                           label: Container(
-                                            color: ConstColor.primaryColor
-                                                .withOpacity(0.5),
+                                            
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -294,8 +293,6 @@ class CustomerRecordWidget extends StatelessWidget {
                                         ),
                                         DataColumn(
                                           label: Container(
-                                            color: ConstColor.primaryColor
-                                                .withOpacity(0.5),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
