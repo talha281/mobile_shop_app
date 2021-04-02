@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_shop_app/blocs/dashboard/bloc/dashboard_bloc.dart';
 import 'package:mobile_shop_app/data/models/product_model.dart';
 import 'package:mobile_shop_app/data/models/product_record_model.dart';
 import 'package:mobile_shop_app/data/repositories/product_record/i_product_record.dart';
@@ -15,7 +17,9 @@ class ProductRecordRepository implements IProductRecordRepository {
   void addProduct(ProductModel? product, int quantity) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // we will get from prefs & add to list
+    
     List<ProductRecordModel?> _productList = [];
+    // int id = await generatedProductId();
     List<String>? listFromPref = prefs.getStringList('prodlistFromPref');
     if (listFromPref != null) {
       listFromPref.forEach((element) {
@@ -24,15 +28,21 @@ class ProductRecordRepository implements IProductRecordRepository {
 
       ProductRecordModel? selectedProduct = _productList.firstWhere(
           (element) =>
-              element!.product!.companyName == product!.companyName!.toLowerCase() &&
+              element!.product!.companyName ==
+                  product!.companyName!.toLowerCase() &&
               element.product!.modelName == product.modelName!.toLowerCase() &&
               element.product!.ram == product.ram!.toLowerCase() &&
-              element.product!.internalMemory == product.internalMemory!.toLowerCase(),
-          orElse: _addNewProduct(product!, _productList, quantity));
+              element.product!.internalMemory ==
+                  product.internalMemory!.toLowerCase(),
+          orElse: () {});
       print(_productList);
       if (selectedProduct != null) {
         print('this is first quantity ${selectedProduct.quantity}');
-        selectedProduct.copyWith(quantity: selectedProduct.quantity + quantity);
+        int index = _productList.indexOf(selectedProduct);
+        _productList.removeAt(index);
+        ProductRecordModel? product = selectedProduct.copyWith(
+            quantity: selectedProduct.quantity + quantity);
+        _productList.insert(index, product);
         print('this is final quantity${selectedProduct.quantity}');
       }
       //_addNewProduct(product, _productList, quantity);
@@ -43,7 +53,9 @@ class ProductRecordRepository implements IProductRecordRepository {
       });
       prefs.setStringList('prodlistFromPref', listToPref);
     } else {
-      _addNewProduct(product!, _productList, quantity);
+      print('bigger else condition');
+      _addNewProduct(
+          product!, _productList, quantity, await generatedProductId());
 
       List<String>? listToPref = [];
       _productList.forEach((element) {
@@ -56,9 +68,11 @@ class ProductRecordRepository implements IProductRecordRepository {
   }
 
   _addNewProduct(ProductModel product, List<ProductRecordModel?> productList,
-      int quantity) {
+      int quantity, int id) {
+    ProductModel tempProduct = product.copyWith(id: id);
+    print('this is id $id');
     productList.add(ProductRecordModel(
-      product: product,
+      product: tempProduct,
       quantity: quantity,
     ));
   }
@@ -322,8 +336,8 @@ class ProductRecordRepository implements IProductRecordRepository {
       if (searchby == 'company-Name') {
         print('we are in company Name');
         Iterable<ProductRecordModel?> filteredRequiredList = _productList.where(
-            (element) =>
-                element!.product!.companyName!.contains(searchElement!.toLowerCase()) );
+            (element) => element!.product!.companyName!
+                .contains(searchElement!.toLowerCase()));
 
         print(filteredRequiredList.toList());
         return filteredRequiredList.toList();
@@ -331,23 +345,23 @@ class ProductRecordRepository implements IProductRecordRepository {
       } else if (searchby == 'model-Name') {
         print('we are in model Name');
         Iterable<ProductRecordModel?> filteredRequiredList = _productList.where(
-            (element) =>
-                element!.product!.modelName!.contains(searchElement!.toLowerCase()));
+            (element) => element!.product!.modelName!
+                .contains(searchElement!.toLowerCase()));
         return filteredRequiredList.toList();
       } else if (searchby == 'ram') {
         print('we are in ram');
         Iterable<ProductRecordModel?> filteredRequiredList = _productList.where(
             (element) =>
-                element!.product!.ram!.contains(searchElement!.toLowerCase()) 
-                // ||
-                // element.product!.ram!.contains(searchElement.substring(1, 3))
-                );
+                element!.product!.ram!.contains(searchElement!.toLowerCase())
+            // ||
+            // element.product!.ram!.contains(searchElement.substring(1, 3))
+            );
         return filteredRequiredList.toList();
       } else if (searchby == 'internal-Memory') {
         print('we are in internal');
         Iterable<ProductRecordModel?> filteredRequiredList = _productList.where(
-            (element) =>
-                element!.product!.internalMemory!.contains(searchElement!.toLowerCase()));
+            (element) => element!.product!.internalMemory!
+                .contains(searchElement!.toLowerCase()));
         return filteredRequiredList.toList();
       } else {
         print('else wali productList');

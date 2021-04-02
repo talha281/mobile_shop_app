@@ -433,9 +433,9 @@ class StocksWidget extends StatelessWidget {
                                                       child: Center(
                                                         child: Text(
                                                           product!.product!
-                                                              .companyName!,
+                                                              .companyName!.toUpperCase(),
                                                           style: TextStyle(
-                                                              fontSize: 11),
+                                                              fontSize: 10),
                                                           textAlign:
                                                               TextAlign.center,
                                                         ),
@@ -476,7 +476,7 @@ class StocksWidget extends StatelessWidget {
                                                               18,
                                                       child: Center(
                                                         child: Text(
-                                                          product.product!.ram!,
+                                                          '${product.product!.ram!}GB',
                                                           style: TextStyle(
                                                               fontSize: 11),
                                                           textAlign:
@@ -497,8 +497,8 @@ class StocksWidget extends StatelessWidget {
                                                               18,
                                                       child: Center(
                                                         child: Text(
-                                                          product.product!
-                                                              .internalMemory!,
+                                                         '${product.product!
+                                                              .internalMemory!}GB',
                                                           style: TextStyle(
                                                               fontSize: 11),
                                                           textAlign:
@@ -519,8 +519,8 @@ class StocksWidget extends StatelessWidget {
                                                               15,
                                                       child: Center(
                                                         child: Text(
-                                                          product.product!
-                                                              .rearCam!,
+                                                          '${product.product!
+                                                              .rearCam!}MP',
                                                           style: TextStyle(
                                                               fontSize: 11),
                                                           textAlign:
@@ -541,8 +541,8 @@ class StocksWidget extends StatelessWidget {
                                                               15,
                                                       child: Center(
                                                         child: Text(
-                                                          product.product!
-                                                              .frontCam!,
+                                                         '${product.product!
+                                                              .frontCam!}MP',
                                                           style: TextStyle(
                                                               fontSize: 11),
                                                           textAlign:

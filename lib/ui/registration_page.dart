@@ -123,7 +123,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   obscureText: true,
                   hintValue: "Enter Password",
                   icon: Icons.lock_outline,
-                  maxLength: 8,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(
@@ -135,7 +134,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   obscureText: true,
                   hintValue: "Confirm password",
                   icon: Icons.lock_outline,
-                  maxLength: 8,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(

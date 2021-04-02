@@ -108,7 +108,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.userFriends,
                                 color: (state is AddCustomerState)
-                                    ? Colors.lightBlue
+                                    ? ConstColor.primaryColor
                                     : Colors.white,
                               ),
                               title: Text('Customers',
