@@ -292,14 +292,14 @@ class _AddNewPhoneWidgetState extends State<AddNewPhoneWidget> {
                                                         .withOpacity(0.5)),
                                               ),
                                             ));
-                                            companyNameController.clear();
-                                            modelNameController.clear();
-                                            ramSizeController.clear();
-                                            internalsController.clear();
-                                            quantityController.clear();
-                                            rearCamController.clear();
-                                            frontCamController.clear();
-                                            priceController.clear();
+                                            // companyNameController.clear();
+                                            // modelNameController.clear();
+                                            // ramSizeController.clear();
+                                            // internalsController.clear();
+                                            // quantityController.clear();
+                                            // rearCamController.clear();
+                                            // frontCamController.clear();
+                                            // priceController.clear();
                                           }
                                         : null,
                                     child: Padding(

@@ -17,24 +17,26 @@ class ProductRecordRepository implements IProductRecordRepository {
   void addProduct(ProductModel? product, int quantity) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // we will get from prefs & add to list
-    
+    int id = await generatedProductId();
     List<ProductRecordModel?> _productList = [];
     // int id = await generatedProductId();
-    List<String>? listFromPref = prefs.getStringList('prodlistFromPref');
+    List<String>? listFromPref = prefs.getStringList('prodlistFromPref') ?? [];
     if (listFromPref != null) {
       listFromPref.forEach((element) {
         _productList.add(ProductRecordModel.fromJson(jsonDecode(element)));
       });
 
       ProductRecordModel? selectedProduct = _productList.firstWhere(
-          (element) =>
-              element!.product!.companyName ==
-                  product!.companyName!.toLowerCase() &&
-              element.product!.modelName == product.modelName!.toLowerCase() &&
-              element.product!.ram == product.ram!.toLowerCase() &&
-              element.product!.internalMemory ==
-                  product.internalMemory!.toLowerCase(),
-          orElse: () {});
+        (element) =>
+            element!.product!.companyName ==
+                product!.companyName!.toLowerCase() &&
+            element.product!.modelName == product.modelName!.toLowerCase() &&
+            element.product!.ram == product.ram!.toLowerCase() &&
+            element.product!.internalMemory ==
+                product.internalMemory!.toLowerCase(), orElse: () {
+                  _addNewProduct(product!, _productList, quantity, id)
+                }
+      );
       print(_productList);
       if (selectedProduct != null) {
         print('this is first quantity ${selectedProduct.quantity}');
@@ -52,29 +54,25 @@ class ProductRecordRepository implements IProductRecordRepository {
         listToPref.add(jsonEncode(element!.toJson()));
       });
       prefs.setStringList('prodlistFromPref', listToPref);
-    } else {
-      print('bigger else condition');
-      _addNewProduct(
-          product!, _productList, quantity, await generatedProductId());
-
-      List<String>? listToPref = [];
-      _productList.forEach((element) {
-        listToPref.add(jsonEncode(element!.toJson()));
-      });
-
-      prefs.setStringList('prodlistFromPref', listToPref);
     }
     // we will store the list to prefs again
   }
 
   _addNewProduct(ProductModel product, List<ProductRecordModel?> productList,
-      int quantity, int id) {
+      int quantity, int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     ProductModel tempProduct = product.copyWith(id: id);
     print('this is id $id');
     productList.add(ProductRecordModel(
       product: tempProduct,
       quantity: quantity,
     ));
+    List<String>? listToPref = [];
+    productList.forEach((element) {
+      listToPref.add(jsonEncode(element!.toJson()));
+    });
+
+    prefs.setStringList('prodlistFromPref', listToPref);
   }
 
 //for collecting Model List
@@ -191,14 +189,15 @@ class ProductRecordRepository implements IProductRecordRepository {
   //for generating id for productRecord
   Future<int> generatedProductId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    print('Generating  id....');
     int? storedId = prefs.getInt('productId');
 
     if (storedId != null) {
       int idToPrefs = storedId + 1;
+      print(storedId);
       //prefs.remove('productId');
 
-      prefs.setInt('productId', idToPrefs);
+      await prefs.setInt('productId', idToPrefs);
       return idToPrefs;
     } else {
       prefs.setInt('productId', 1);
