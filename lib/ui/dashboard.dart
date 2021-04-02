@@ -61,6 +61,12 @@ class _DashboardState extends State<Dashboard> {
                               )),
                         ),
                       ),
+                      Container(
+                        width: 250,
+                        height: 100,
+                        child: Image.asset('assets/images/double_phone.png',
+                            height: 500, color: Colors.white),
+                      ),
                       SizedBox(height: 30),
                       BlocBuilder<DashboardBloc, DashboardState>(
                         builder: (context, state) {
@@ -71,9 +77,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.mobileAlt,
                                 color: (state is AddPhoneState)
-                                    ? ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        
+                                    ? ConstColor.primaryColor.withOpacity(0.5)
                                     : Colors.white,
                               ),
                               title: Text('Add New Phone',
@@ -166,9 +170,7 @@ class _DashboardState extends State<Dashboard> {
                               leading: Icon(
                                 FontAwesomeIcons.searchengin,
                                 color: (state is CustomerRecordState)
-                                    ? ConstColor.primaryColor
-                                        .withOpacity(0.5)
-                                        
+                                    ? ConstColor.primaryColor.withOpacity(0.5)
                                     : Colors.white,
                               ),
                               title: Text('Customer Records',
